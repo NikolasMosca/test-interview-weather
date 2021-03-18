@@ -1,0 +1,19 @@
+@import "../../theme/main.scss";
+
+.CardContainer {
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+
+    &.bg-primary {
+        background: $bg-primary;
+    }
+
+    &.bg-secondary {
+        background: $bg-secondary;
+    }
+
+    &.bg-tertiary {
+        background: $bg-tertiary;
+    }
+}
