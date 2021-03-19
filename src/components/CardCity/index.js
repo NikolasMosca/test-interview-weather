@@ -9,8 +9,8 @@ const CardCity = ({ background, city, date, hour, temperature, image }) => {
         <Card background={background} className={styles.CardContainer}>
             <div>
                 <h3>{city}</h3>
-                <time>{date}</time>
-                <time>{hour}</time>
+                <time className={styles.Date}>{date}</time>
+                <time className={styles.Time}>{hour}</time>
             </div>
             {image && <img src={image} alt={`${city} - ${date} - ${temperature}`} />}
             <h4>{temperature}</h4>
