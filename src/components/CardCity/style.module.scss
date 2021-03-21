@@ -1,0 +1,28 @@
+@import "../../theme/main.scss";
+
+.CardContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        @extend %FontBold;
+    }
+
+    h4 {
+        @extend %FontTemperature;
+    }
+
+    time {
+        display: block;
+    }
+
+    .Date {
+        @extend %FontRegular;
+    }
+
+    .Time {
+        @extend %FontThin;
+        color: $color-tertiary;
+    }
+}

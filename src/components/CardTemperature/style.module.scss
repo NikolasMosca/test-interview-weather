@@ -1,0 +1,67 @@
+@import "../../theme/main.scss";
+
+.CardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto;
+
+    h2 {
+        @extend %FontBold;
+        font-size: 25px;
+    }
+
+    .Item {
+        display: flex;
+        justify-content: space-between;
+        min-width: 200px;
+        height: 90px;
+
+        h3 {
+            @extend %FontBold;
+            font-weight: 400;
+            width: 40px;
+        }
+
+        time {
+            @extend %FontLight;
+        }
+
+        .VerticalLine {
+            position: relative;
+            background: rgba(255, 255, 255, 0.7);
+            width: 10px;
+            height: 100%;
+            margin-top: 7px;
+
+            .Point {
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                background: $color-primary;
+                margin-left: -5px;
+                margin-top: -3px;
+            }
+        }
+
+        &:first-child {
+            h3 {
+                @extend %FontBold;
+                padding-top: 3px;
+            }
+            time {
+                visibility: hidden;
+            }
+            .Point {
+                width: 30px;
+                height: 30px;
+                margin-left: -10px;
+            }
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

@@ -1,0 +1,15 @@
+@import "../../theme/main.scss";
+
+.CardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        @extend %FontBold;
+    }
+
+    h4 {
+        @extend %FontTemperature;
+    }
+}
