@@ -13,7 +13,7 @@ export const weatherSlice = createSlice({
     reducers: {
         //Set current city to display
         setCurrentCity: (state, action) => {
-            state.previousCity = state.currentCity || action.payload
+            state.previousCity = Object.keys(state.currentCity).length > 0 ? state.currentCity : action.payload
             state.currentCity = action.payload
         },
         //Add the city into the list on the top right
@@ -44,7 +44,7 @@ export const weatherSlice = createSlice({
 
 export const { setCurrentCity, addCity, selectCity, selectPreviousCity, setError } = weatherSlice.actions
 
-//Get the correct name in base of speed (m/s)
+//Get the correct name in base of speed (m/s) [From Beaufort Wind Scale]
 const getTypeOfWind = (speed) => {
     if (speed < 3.5) return `Light wind`
     if (speed < 8) return `Moderate wind`
@@ -90,7 +90,6 @@ export const getCityData = (cityName) => async (dispatch) => {
                 appid: apiKey,
             },
         })
-        console.log("data for london", data, details.data, history.data)
 
         const {
             id,
