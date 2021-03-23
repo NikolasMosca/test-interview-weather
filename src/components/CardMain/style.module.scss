@@ -1,0 +1,27 @@
+@import "../../theme/main.scss";
+
+.MainCard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: {
+        top: 70px;
+        left: 100px;
+    }
+
+    .CurrentTemperature {
+        position: absolute;
+        top: 50%;
+        left: -40px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 300px;
+
+        h2 {
+            @extend %FontTemperature;
+        }
+    }
+}
