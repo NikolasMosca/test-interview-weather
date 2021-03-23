@@ -12,6 +12,10 @@
     background-size: cover !important;
     color: $color-secondary;
 
+    time {
+        display: block;
+    }
+
     h2 {
         @extend %FontLight;
         text-transform: capitalize;

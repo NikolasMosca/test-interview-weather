@@ -8,7 +8,7 @@ export default {
 }
 
 const Template = (args) => (
-    <div style={{ height: 400, overflow: "hidden" }}>
+    <div style={{ height: 600, overflow: "hidden", padding: 40 }}>
         <CardMain {...args} />
     </div>
 )
