@@ -18,7 +18,7 @@ Simple.args = {
     background: "bg-primary",
     name: "London",
     date: "Tuesday 23, March",
-    temperature: "22",
+    temperature: 22,
     weatherImage: "",
     weatherDescription: "",
 }
