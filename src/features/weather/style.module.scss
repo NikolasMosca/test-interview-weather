@@ -1,0 +1,155 @@
+@import "../../theme/main.scss";
+
+.WeatherContainer {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .MainContainer {
+        width: 70%;
+        height: calc(50vh - 60px);
+    }
+
+    .CityContainer {
+        width: 30%;
+        height: calc(50vh - 60px);
+        padding-left: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+
+        .AddCity {
+            @extend %FontRegular;
+            color: $color-secondary;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 60px 0px;
+        }
+
+        .CardCity {
+            width: 100%;
+            height: 140px;
+            margin-bottom: 30px;
+        }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .TempContainer {
+        padding-top: 40px;
+        width: 20%;
+        height: calc(50vh - 60px);
+
+        > h3 {
+            @extend %FontBold;
+            color: $color-secondary;
+            padding: 15px;
+        }
+    }
+
+    .TabsContainer {
+        width: 50%;
+        height: 50vh;
+        padding: {
+            top: 40px;
+            left: 40px;
+        }
+
+        div {
+            background: $bg-primary;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .SearchContainer {
+        width: 30%;
+        height: 50vh;
+        padding: {
+            top: 40px;
+            left: 40px;
+        }
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .SearchInput {
+            > h3 {
+                @extend %FontBold;
+                color: $color-secondary;
+                padding: 15px;
+            }
+
+            .Input {
+                display: flex;
+                height: 140px;
+                border-radius: 20px;
+                background: $color-primary;
+
+                > input {
+                    @extend %FontBold;
+                    border: none;
+                    width: calc(100% - 60px);
+                    border-radius: 20px;
+                    padding-left: 40px;
+                }
+
+                > button {
+                    width: 60px;
+                    background: $bg-primary;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 20px;
+                }
+            }
+        }
+
+        .LocalizationContainer {
+            > h3 {
+                @extend %FontBold;
+                color: $color-secondary;
+                padding: 15px;
+            }
+
+            > button {
+                @extend %FontBold;
+                width: 100%;
+                height: 140px;
+                background: $bg-primary;
+                color: $color-primary;
+                border: none;
+                cursor: pointer;
+                border-radius: 20px;
+            }
+        }
+    }
+}
+
+.Loader {
+    @extend %FontBold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > button {
+        @extend %FontBold;
+        height: 140px;
+        background: $bg-primary;
+        color: $color-primary;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+        padding: 20px;
+    }
+}
