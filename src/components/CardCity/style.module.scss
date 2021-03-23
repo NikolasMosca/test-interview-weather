@@ -24,5 +24,6 @@
     .Time {
         @extend %FontThin;
         color: $color-tertiary;
+        margin-top: 15px;
     }
 }

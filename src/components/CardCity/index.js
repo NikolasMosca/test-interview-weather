@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Card from "../Card"
+import { getImageUrl } from "../../features/weather/weatherSlice"
 
 import styles from "./style.module.scss"
 
@@ -12,8 +13,8 @@ const CardCity = ({ background, city, date, hour, temperature, image }) => {
                 <time className={styles.Date}>{date}</time>
                 <time className={styles.Time}>{hour}</time>
             </div>
-            {image && <img src={image} alt={`${city} - ${date} - ${temperature}`} />}
-            <h4>{temperature}</h4>
+            {image && <img src={getImageUrl(image)} alt={`${city} - ${date} - ${temperature}`} />}
+            <h4>{temperature}°</h4>
         </Card>
     )
 }
@@ -38,7 +39,7 @@ CardCity.propTypes = {
     /**
      * Temperature displayed on the right
      */
-    temperature: PropTypes.string.isRequired,
+    temperature: PropTypes.number.isRequired,
     /**
      * Image displayed at the bottom
      */
