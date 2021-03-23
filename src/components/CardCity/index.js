@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Card from "../Card"
-import { getImageUrl } from "../../features/weather/weatherSlice"
+import { getImageUrl } from "../../features/Weather/weatherSlice"
 
 import styles from "./style.module.scss"
 

@@ -1,15 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Card from "../Card"
-import { getImageUrl } from "../../features/weather/weatherSlice"
+import { getImageUrl } from "../../features/Weather/weatherSlice"
 
 import styles from "./style.module.scss"
 
-const CardMain = ({ background, name, date, temperature, weatherImage, weatherDescription }) => {
+const CardMain = ({ name, date, temperature, weatherImage, weatherDescription }) => {
     return (
-        <Card background={background} className={styles.MainCard}>
+        <Card className={styles.MainCard}>
             <h1>{name}</h1>
             <time>{date}</time>
+            <h2>{weatherDescription}</h2>
 
             <Card className={styles.CurrentTemperature}>
                 <h2>{temperature}°</h2>
@@ -20,10 +21,6 @@ const CardMain = ({ background, name, date, temperature, weatherImage, weatherDe
 }
 
 CardMain.propTypes = {
-    /**
-     * Define which background gradient use in this card
-     */
-    background: PropTypes.oneOf(["bg-primary", "bg-secondary", "bg-tertiary"]),
     /**
      * City name
      */
@@ -46,7 +43,6 @@ CardMain.propTypes = {
     weatherDescription: PropTypes.string,
 }
 CardMain.defaultProps = {
-    background: "bg-primary",
     weatherDescription: "",
 }
 
