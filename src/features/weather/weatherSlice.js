@@ -18,7 +18,10 @@ export const weatherSlice = createSlice({
         },
         //Add the city into the list on the top right
         addCity: (state) => {
-            state.cities.push(state.currentCity)
+            const findCity = state.cities.find((city) => city.id === state.currentCity.id)
+            if (!findCity) {
+                state.cities.push(state.currentCity)
+            }
         },
         //Set into current city the city that the user clicks
         selectCity: (state, action) => {
