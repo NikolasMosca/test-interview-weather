@@ -37,7 +37,7 @@ const Weather = () => {
 
     useEffect(() => {
         dispatch(getCityData("London"))
-    }, [])
+    }, [dispatch])
 
     if (error?.length > 0) {
         return (
