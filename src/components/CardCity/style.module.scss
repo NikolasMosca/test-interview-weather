@@ -18,12 +18,17 @@
     }
 
     .Date {
-        @extend %FontRegular;
+        @extend %FontLight;
+        width: 150px;
     }
 
     .Time {
         @extend %FontThin;
         color: $color-tertiary;
-        margin-top: 15px;
+        margin-top: 10px;
+    }
+
+    img {
+        width: 100px;
     }
 }

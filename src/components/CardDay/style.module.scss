@@ -3,10 +3,12 @@
 .CardContainer {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    height: 100%;
 
     h3 {
-        @extend %FontBold;
+        @extend %FontSemiBold;
     }
 
     h4 {
