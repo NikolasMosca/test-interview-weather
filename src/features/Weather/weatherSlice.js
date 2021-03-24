@@ -92,7 +92,7 @@ export const getCityData = (cityName) => async (dispatch) => {
             },
         })
         //Get details about previous data of the current day
-        const history = await axios.get(`http://api.openweathermap.org/data/2.5/onecall/timemachine`, {
+        const history = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine`, {
             params: {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
