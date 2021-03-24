@@ -92,7 +92,7 @@ export const getCityData = (cityName) => async (dispatch) => {
             },
         })
         //Get details about previous data of the current day
-        const history = await axios.get(`http://api.openweathermap.org/data/2.5/onecall/timemachine`, {
+        const history = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine`, {
             params: {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
@@ -164,6 +164,6 @@ export const selectCurrentCity = (state) => state.weather.currentCity
 export const selectCitiesList = (state) => state.weather.cities
 export const selectError = (state) => state.weather.error
 
-export const getImageUrl = (image) => `http://openweathermap.org/img/wn/${image}@2x.png`
+export const getImageUrl = (image) => `https://openweathermap.org/img/wn/${image}@2x.png`
 
 export default weatherSlice.reducer
