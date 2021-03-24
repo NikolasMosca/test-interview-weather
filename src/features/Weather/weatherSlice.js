@@ -46,11 +46,23 @@ export const { setCurrentCity, addCity, selectCity, selectPreviousCity, setError
 
 //Get the correct name in base of speed (m/s) [From Beaufort Wind Scale]
 const getTypeOfWind = (speed) => {
-    if (speed < 3.5) return `Light wind`
-    if (speed < 8) return `Moderate wind`
-    if (speed < 24) return `Strong wind`
-    if (speed < 30) return `Storm`
-    return `Hurricane`
+    const beaufortScale = [
+        { minSpeed: 0, maxSpeed: 0, value: "Calm" },
+        { minSpeed: 0.3, maxSpeed: 1.5, value: "Light air" },
+        { minSpeed: 1.6, maxSpeed: 3.4, value: "Light breeze" },
+        { minSpeed: 3.4, maxSpeed: 5.4, value: "Gentle breeze" },
+        { minSpeed: 5.5, maxSpeed: 7.9, value: "Moderate breeze" },
+        { minSpeed: 8.0, maxSpeed: 10.7, value: "Fresh breeze" },
+        { minSpeed: 10.8, maxSpeed: 13.8, value: "Strong breeze" },
+        { minSpeed: 13.9, maxSpeed: 17.1, value: "Near gale" },
+        { minSpeed: 17.2, maxSpeed: 20.7, value: "Gale" },
+        { minSpeed: 20.8, maxSpeed: 24.4, value: "Strong gale" },
+        { minSpeed: 24.5, maxSpeed: 28.4, value: "Storm" },
+        { minSpeed: 28.5, maxSpeed: 32.6, value: "Violent Storm" },
+        { minSpeed: 32.7, maxSpeed: 100, value: "Hurricane" },
+    ]
+    const windType = beaufortScale.find((wind) => speed >= wind.minSpeed && speed <= wind.maxSpeed)
+    return windType?.value || ""
 }
 
 //Get all data from the city
@@ -84,7 +96,7 @@ export const getCityData = (cityName) => async (dispatch) => {
             params: {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
-                dt: moment(moment().format("YYYY-MM-DD")).unix(),
+                dt: moment().subtract(1, "seconds").unix(),
                 exclude: "minutely",
                 units: "metric",
                 appid: apiKey,
@@ -115,13 +127,14 @@ export const getCityData = (cityName) => async (dispatch) => {
                 },
                 //Get data for temperatures view
                 temperatures: history.data.hourly
+                    .filter((item) => moment.unix(item.dt).valueOf() <= moment().valueOf())
                     .map((item) => ({
                         ...item,
                         temp: Math.round(item.temp),
                         hour: moment.unix(item.dt).format("h a"),
                         hourMinutes: moment.unix(item.dt).format("h:mm a"),
                     }))
-                    //.filter((item) => moment.unix(item.dt).format() <= moment().format())
+
                     .sort((a, b) => {
                         if (a.dt > b.dt) return -1
                         if (a.dt < b.dt) return 1
