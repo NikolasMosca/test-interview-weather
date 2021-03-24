@@ -147,7 +147,7 @@ const Weather = () => {
 
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
-                    <button>
+                    <button onClick={getBrowserGeoLocation}>
                         <img src={LocalizationImage} alt="Localization icon" />
                         Add localization
                     </button>
