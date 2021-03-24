@@ -1,0 +1,114 @@
+@import "../../theme/main.scss";
+
+.TabsContainer {
+    width: 100%;
+    height: 100%;
+
+    .Header {
+        height: 80px;
+        display: flex;
+
+        .Item {
+            @extend %FontBold;
+            background: $color-primary;
+            color: $color-secondary;
+            height: 100%;
+            padding: 20px;
+            border-radius: 20px 20px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.Active {
+                background: $bg-tab;
+                color: $color-primary;
+            }
+        }
+    }
+
+    .Body {
+        background: $bg-tab;
+        border-radius: 0px 20px 20px 20px;
+        padding: 20px;
+        height: calc(100% - 80px);
+
+        .WeekView {
+            height: calc(100% - 35px);
+            display: flex;
+
+            .Item {
+                width: calc(100% / 3);
+                min-height: 300px;
+                height: 100%;
+                padding: 0px 10px;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        .MonthView {
+            display: flex;
+            align-items: center;
+            color: $color-primary;
+            height: 100%;
+            padding-top: 20px;
+
+            .Left {
+                width: 50%;
+                height: 100%;
+                time {
+                    @extend %FontSemiBold;
+                    display: block;
+                    padding-left: 30px;
+                }
+
+                img {
+                    display: block;
+                    width: 100%;
+                    padding-right: 30px;
+                }
+            }
+
+            .Right {
+                height: 100%;
+                overflow-y: auto;
+                h2 {
+                    @extend %FontTemperature;
+                    margin-bottom: 50px;
+                }
+
+                p {
+                    @extend %FontLight;
+                    margin: 10px 0px;
+                }
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        .Pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
+
+            .Dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                background: $bg-dot;
+                margin: 0px 5px;
+
+                &.Active {
+                    width: 12px;
+                    height: 12px;
+                    background: $color-primary;
+                }
+            }
+        }
+    }
+}
