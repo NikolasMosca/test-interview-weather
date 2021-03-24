@@ -150,6 +150,10 @@
     justify-content: center;
     align-items: center;
 
+    .Animation {
+        @extend .lds-ellipsis;
+    }
+
     > button {
         @extend %FontBold;
         height: 140px;

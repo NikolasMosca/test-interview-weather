@@ -86,7 +86,7 @@ export const getCityData = (cityName) => async (dispatch) => {
             params: {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
-                exclude: "minutely",
+                exclude: "minutely,hourly,alerts",
                 units: "metric",
                 appid: apiKey,
             },
@@ -97,7 +97,7 @@ export const getCityData = (cityName) => async (dispatch) => {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
                 dt: moment().subtract(1, "seconds").unix(),
-                exclude: "minutely",
+                exclude: "current,minutely,daily,alerts",
                 units: "metric",
                 appid: apiKey,
             },

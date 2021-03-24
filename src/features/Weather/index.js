@@ -49,7 +49,17 @@ const Weather = () => {
     }
 
     if (isLoading) {
-        return <div className={styles.Loader}>Loading...</div>
+        return (
+            <div className={styles.Loader}>
+                <div className={styles.Animation}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                Loading...
+            </div>
+        )
     }
 
     const {
