@@ -1,6 +1,7 @@
 import axios from "axios"
 import moment from "moment"
 import { createSlice } from "@reduxjs/toolkit"
+const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
 
 export const weatherSlice = createSlice({
     name: "counter",
@@ -68,26 +69,18 @@ const getTypeOfWind = (speed) => {
 /**
  * Get all data from the city
  * @param {string} cityName 
- * @param {object {lat: float, lon: float}} position 
+ * @param {{lat: float, lon: float}} position 
  */
 export const getCityData = (cityName, position) => async (dispatch) => {
+    console.log("gggg")
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
 
     //Remove active city and trigger loading
     dispatch(setCurrentCity({}))
 
-    const params = {
-        appid: apiKey,
-        units: "metric"
-    }
-    if (position && Object.keys(position).length > 0) {
-        params.lat = position.lat
-        params.lon = position.lon
-    } else params.q = cityName
-
     try {
         //Get basic data from city, includes lat and lon and the id
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, { params })
+        const { data } = getBasicData(cityName, position)
 
         const detailParams = {
             lat: position && Object.keys(position).length > 0 ? position.lat : data.coord.lat,
@@ -160,6 +153,27 @@ export const getCityData = (cityName, position) => async (dispatch) => {
     } catch (e) {
         dispatch(setError("Sorry the city was not found"))
     }
+}
+
+export const getBasicData = async (cityName, position) => {
+    //Get basic data from city, includes lat and lon and the id
+    if (!cityName && !position) return 
+    const params = {
+        appid: apiKey,
+        units: "metric"
+    }
+    if (position && Object.keys(position).length > 0) {
+        if (Object.keys(position).toString() !== 'lat,lon') return false
+        params.lat = position.lat
+        params.lon = position.lon
+    } else {
+        if (typeof cityName !== "string") return false
+        params.q = cityName
+    }
+
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, { params })
+
+    return data
 }
 
 export const selectCurrentCity = (state) => state.weather.currentCity
