@@ -13,6 +13,11 @@ import {
 import CardMain from "../../components/CardMain"
 import CardCity from "../../components/CardCity"
 import CardTemperature from "../../components/CardTemperature"
+import Tabs from "../../components/Tabs"
+
+import AddImage from "../../assets/add.png"
+import SearchImage from "../../assets/search.png"
+import LocalizationImage from "../../assets/localization.png"
 
 import styles from "./style.module.scss"
 
@@ -32,7 +37,7 @@ const Weather = () => {
 
     useEffect(() => {
         dispatch(getCityData("London"))
-    }, [])
+    }, [dispatch])
 
     if (error?.length > 0) {
         return (
@@ -44,7 +49,17 @@ const Weather = () => {
     }
 
     if (isLoading) {
-        return <div className={styles.Loader}>Loading...</div>
+        return (
+            <div className={styles.Loader}>
+                <div className={styles.Animation}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                Loading...
+            </div>
+        )
     }
 
     const getBrowserGeoLocation = () => {
@@ -64,6 +79,8 @@ const Weather = () => {
         date,
         current: { temperature, weather, description },
         temperatures,
+        month,
+        daily,
     } = currentCity
 
     return (
@@ -80,7 +97,8 @@ const Weather = () => {
 
             <div className={styles.CityContainer}>
                 <button className={styles.AddCity} onClick={onAddCity}>
-                    Aggiungi città
+                    <img src={AddImage} alt="Add icon" />
+                    Add city
                 </button>
                 {cities.map((city, index) => (
                     <div key={index} className={styles.CardCity} onClick={() => onClickCity(city.id)}>
@@ -107,7 +125,7 @@ const Weather = () => {
             </div>
 
             <div className={styles.TabsContainer}>
-                <div></div>
+                <Tabs week={daily} month={month} />
             </div>
 
             <div className={styles.SearchContainer}>
@@ -121,13 +139,18 @@ const Weather = () => {
                             type="text"
                             placeholder="ex: Miami"
                         />
-                        <button onClick={onSearchCity}></button>
+                        <button onClick={onSearchCity}>
+                            <img src={SearchImage} alt="Search icon" />
+                        </button>
                     </div>
                 </div>
 
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
-                    <button onClick={getBrowserGeoLocation}>Add localization</button>
+                    <button>
+                        <img src={LocalizationImage} alt="Localization icon" />
+                        Add localization
+                    </button>
                 </div>
             </div>
         </div>

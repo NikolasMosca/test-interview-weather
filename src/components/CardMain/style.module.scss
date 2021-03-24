@@ -6,7 +6,7 @@
     height: 100%;
     padding: {
         top: 130px;
-        left: 130px;
+        left: 150px;
     }
     background: url(../../assets/main.jpg) !important;
     background-size: cover !important;
@@ -30,10 +30,17 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        width: 160px;
         min-height: 300px;
+        max-height: 60%;
+        padding: 20px 10px;
 
         h2 {
             @extend %FontTemperature;
+        }
+
+        img {
+            width: 100%;
         }
     }
 }

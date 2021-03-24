@@ -72,7 +72,6 @@ const getTypeOfWind = (speed) => {
  * @param {{lat: float, lon: float}} position 
  */
 export const getCityData = (cityName, position) => async (dispatch) => {
-    console.log("gggg")
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
 
     //Remove active city and trigger loading
@@ -85,17 +84,17 @@ export const getCityData = (cityName, position) => async (dispatch) => {
         const detailParams = {
             lat: position && Object.keys(position).length > 0 ? position.lat : data.coord.lat,
             lon: position && Object.keys(position).length > 0 ? position.lon : data.coord.lon,
-            exclude: "minutely",
+            
             units: "metric",
             appid: apiKey,
         }
         //Get details about forecast data
         const details = await axios.get(`https://api.openweathermap.org/data/2.5/onecall`, {
-            params: detailParams,
+            params: {...detailParams, exclude: "minutely"},
         })
         //Get details about previous data of the current day
         const history = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine`, {
-            params: {...detailParams, dt: moment().subtract(1, "seconds").unix()},
+            params: {...detailParams, dt: moment().subtract(1, "seconds").unix(), exclude: "current,minutely,daily,alerts"},
         })
 
         const {
@@ -129,7 +128,6 @@ export const getCityData = (cityName, position) => async (dispatch) => {
                         hour: moment.unix(item.dt).format("h a"),
                         hourMinutes: moment.unix(item.dt).format("h:mm a"),
                     }))
-
                     .sort((a, b) => {
                         if (a.dt > b.dt) return -1
                         if (a.dt < b.dt) return 1
@@ -140,13 +138,15 @@ export const getCityData = (cityName, position) => async (dispatch) => {
                     date: moment().format("ddd, DD MMM"),
                     image: weather && weather.length > 0 ? weather[0].icon : null,
                     typeWind: getTypeOfWind(wind.speed),
-                    data: details.data.current,
+                    data: { ...details.data.current, ...main },
                 },
                 //Get data for daily view
                 daily: details.data.daily.map((item) => ({
                     ...item,
                     day: moment.unix(item.dt).format("dddd"),
                     date: moment.unix(item.dt).format("DD/MM/YYYY HH:mm:ss"),
+                    image: item.weather && item.weather.length > 0 ? item.weather[0].icon : null,
+                    temp: item.temp.day,
                 })),
             })
         )
