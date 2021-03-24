@@ -13,6 +13,11 @@ import {
 import CardMain from "../../components/CardMain"
 import CardCity from "../../components/CardCity"
 import CardTemperature from "../../components/CardTemperature"
+import Tabs from "../../components/Tabs"
+
+import AddImage from "../../assets/add.png"
+import SearchImage from "../../assets/search.png"
+import LocalizationImage from "../../assets/localization.png"
 
 import styles from "./style.module.scss"
 
@@ -52,7 +57,11 @@ export default () => {
         date,
         current: { temperature, weather, description },
         temperatures,
+        month,
+        daily,
     } = currentCity
+
+    console.log(currentCity)
 
     return (
         <div className={styles.WeatherContainer}>
@@ -68,7 +77,8 @@ export default () => {
 
             <div className={styles.CityContainer}>
                 <button className={styles.AddCity} onClick={onAddCity}>
-                    Aggiungi città
+                    <img src={AddImage} />
+                    Add city
                 </button>
                 {cities.map((city, index) => (
                     <div key={index} className={styles.CardCity} onClick={() => onClickCity(city.id)}>
@@ -95,7 +105,7 @@ export default () => {
             </div>
 
             <div className={styles.TabsContainer}>
-                <div></div>
+                <Tabs week={daily} month={month} />
             </div>
 
             <div className={styles.SearchContainer}>
@@ -109,13 +119,18 @@ export default () => {
                             type="text"
                             placeholder="ex: Miami"
                         />
-                        <button onClick={onSearchCity}></button>
+                        <button onClick={onSearchCity}>
+                            <img src={SearchImage} />
+                        </button>
                     </div>
                 </div>
 
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
-                    <button>Add localization</button>
+                    <button>
+                        <img src={LocalizationImage} />
+                        Add localization
+                    </button>
                 </div>
             </div>
         </div>
