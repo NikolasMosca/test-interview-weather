@@ -44,6 +44,7 @@
     "@storybook/addon-links": "^6.1.21",
     "@storybook/node-logger": "^6.1.21",
     "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/react": "^6.1.21"
+    "@storybook/react": "^6.1.21",
+    "redux-mock-store": "^1.5.4"
   }
 }

@@ -62,6 +62,18 @@ const Weather = () => {
         )
     }
 
+    const getBrowserGeoLocation = () => {
+        if(!navigator.geolocation) {
+            alert('Geolocation is not supported by your browser')
+          } else {
+            navigator.geolocation.getCurrentPosition(
+                (position) => dispatch(getCityData(null, {lat: position.coords.latitude, lon: position.coords.longitude})),
+                (error) => alert(error.message),
+                { enableHighAccuracy: false, timeout: 5000},
+            );
+          }
+    }
+
     const {
         name,
         date,
@@ -135,7 +147,7 @@ const Weather = () => {
 
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
-                    <button>
+                    <button onClick={getBrowserGeoLocation}>
                         <img src={LocalizationImage} alt="Localization icon" />
                         Add localization
                     </button>

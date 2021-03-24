@@ -1,6 +1,7 @@
 import axios from "axios"
 import moment from "moment"
 import { createSlice } from "@reduxjs/toolkit"
+const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
 
 export const weatherSlice = createSlice({
     name: "counter",
@@ -65,8 +66,12 @@ const getTypeOfWind = (speed) => {
     return windType?.value || ""
 }
 
-//Get all data from the city
-export const getCityData = (cityName) => async (dispatch) => {
+/**
+ * Get all data from the city
+ * @param {string} cityName 
+ * @param {{lat: float, lon: float}} position 
+ */
+export const getCityData = (cityName, position) => async (dispatch) => {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
 
     //Remove active city and trigger loading
@@ -74,33 +79,22 @@ export const getCityData = (cityName) => async (dispatch) => {
 
     try {
         //Get basic data from city, includes lat and lon and the id
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
-            params: {
-                q: cityName,
-                appid: apiKey,
-                units: "metric",
-            },
-        })
+        const { data } = getBasicData(cityName, position)
+
+        const detailParams = {
+            lat: position && Object.keys(position).length > 0 ? position.lat : data.coord.lat,
+            lon: position && Object.keys(position).length > 0 ? position.lon : data.coord.lon,
+            
+            units: "metric",
+            appid: apiKey,
+        }
         //Get details about forecast data
         const details = await axios.get(`https://api.openweathermap.org/data/2.5/onecall`, {
-            params: {
-                lat: data.coord.lat,
-                lon: data.coord.lon,
-                exclude: "minutely,hourly,alerts",
-                units: "metric",
-                appid: apiKey,
-            },
+            params: {...detailParams, exclude: "minutely"},
         })
         //Get details about previous data of the current day
         const history = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine`, {
-            params: {
-                lat: data.coord.lat,
-                lon: data.coord.lon,
-                dt: moment().subtract(1, "seconds").unix(),
-                exclude: "current,minutely,daily,alerts",
-                units: "metric",
-                appid: apiKey,
-            },
+            params: {...detailParams, dt: moment().subtract(1, "seconds").unix(), exclude: "current,minutely,daily,alerts"},
         })
 
         const {
@@ -161,10 +155,31 @@ export const getCityData = (cityName) => async (dispatch) => {
     }
 }
 
+export const getBasicData = async (cityName, position) => {
+    //Get basic data from city, includes lat and lon and the id
+    if (!cityName && !position) return 
+    const params = {
+        appid: apiKey,
+        units: "metric"
+    }
+    if (position && Object.keys(position).length > 0) {
+        if (Object.keys(position).toString() !== 'lat,lon') return false
+        params.lat = position.lat
+        params.lon = position.lon
+    } else {
+        if (typeof cityName !== "string") return false
+        params.q = cityName
+    }
+
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, { params })
+
+    return data
+}
+
 export const selectCurrentCity = (state) => state.weather.currentCity
 export const selectCitiesList = (state) => state.weather.cities
 export const selectError = (state) => state.weather.error
 
-export const getImageUrl = (image) => `http://openweathermap.org/img/wn/${image}@4x.png`
+export const getImageUrl = (image) => `https://openweathermap.org/img/wn/${image}@2x.png`
 
 export default weatherSlice.reducer
