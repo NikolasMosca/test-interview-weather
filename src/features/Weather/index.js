@@ -21,7 +21,7 @@ import LocalizationImage from "../../assets/localization.png"
 
 import styles from "./style.module.scss"
 
-export default () => {
+const Weather = () => {
     const [search, setSearch] = useState("")
 
     const dispatch = useDispatch()
@@ -61,8 +61,6 @@ export default () => {
         daily,
     } = currentCity
 
-    console.log(currentCity)
-
     return (
         <div className={styles.WeatherContainer}>
             <div className={styles.MainContainer}>
@@ -77,7 +75,7 @@ export default () => {
 
             <div className={styles.CityContainer}>
                 <button className={styles.AddCity} onClick={onAddCity}>
-                    <img src={AddImage} />
+                    <img src={AddImage} alt="Add icon" />
                     Add city
                 </button>
                 {cities.map((city, index) => (
@@ -120,7 +118,7 @@ export default () => {
                             placeholder="ex: Miami"
                         />
                         <button onClick={onSearchCity}>
-                            <img src={SearchImage} />
+                            <img src={SearchImage} alt="Search icon" />
                         </button>
                     </div>
                 </div>
@@ -128,7 +126,7 @@ export default () => {
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
                     <button>
-                        <img src={LocalizationImage} />
+                        <img src={LocalizationImage} alt="Localization icon" />
                         Add localization
                     </button>
                 </div>
@@ -136,3 +134,5 @@ export default () => {
         </div>
     )
 }
+
+export default Weather
