@@ -86,18 +86,18 @@ export const getCityData = (cityName) => async (dispatch) => {
             params: {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
-                exclude: "minutely",
+                exclude: "minutely,hourly,alerts",
                 units: "metric",
                 appid: apiKey,
             },
         })
         //Get details about previous data of the current day
-        const history = await axios.get(`http://api.openweathermap.org/data/2.5/onecall/timemachine`, {
+        const history = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine`, {
             params: {
                 lat: data.coord.lat,
                 lon: data.coord.lon,
                 dt: moment().subtract(1, "seconds").unix(),
-                exclude: "minutely",
+                exclude: "current,minutely,daily,alerts",
                 units: "metric",
                 appid: apiKey,
             },
@@ -134,7 +134,6 @@ export const getCityData = (cityName) => async (dispatch) => {
                         hour: moment.unix(item.dt).format("h a"),
                         hourMinutes: moment.unix(item.dt).format("h:mm a"),
                     }))
-
                     .sort((a, b) => {
                         if (a.dt > b.dt) return -1
                         if (a.dt < b.dt) return 1
@@ -145,13 +144,15 @@ export const getCityData = (cityName) => async (dispatch) => {
                     date: moment().format("ddd, DD MMM"),
                     image: weather && weather.length > 0 ? weather[0].icon : null,
                     typeWind: getTypeOfWind(wind.speed),
-                    data: details.data.current,
+                    data: { ...details.data.current, ...main },
                 },
                 //Get data for daily view
                 daily: details.data.daily.map((item) => ({
                     ...item,
                     day: moment.unix(item.dt).format("dddd"),
                     date: moment.unix(item.dt).format("DD/MM/YYYY HH:mm:ss"),
+                    image: item.weather && item.weather.length > 0 ? item.weather[0].icon : null,
+                    temp: item.temp.day,
                 })),
             })
         )
@@ -164,6 +165,6 @@ export const selectCurrentCity = (state) => state.weather.currentCity
 export const selectCitiesList = (state) => state.weather.cities
 export const selectError = (state) => state.weather.error
 
-export const getImageUrl = (image) => `http://openweathermap.org/img/wn/${image}@2x.png`
+export const getImageUrl = (image) => `http://openweathermap.org/img/wn/${image}@4x.png`
 
 export default weatherSlice.reducer
