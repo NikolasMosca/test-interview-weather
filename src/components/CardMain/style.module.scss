@@ -1,0 +1,39 @@
+@import "../../theme/main.scss";
+
+.MainCard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: {
+        top: 130px;
+        left: 130px;
+    }
+    background: url(../../assets/main.jpg) !important;
+    background-size: cover !important;
+    color: $color-secondary;
+
+    time {
+        display: block;
+    }
+
+    h2 {
+        @extend %FontLight;
+        text-transform: capitalize;
+    }
+
+    .CurrentTemperature {
+        position: absolute;
+        top: 50%;
+        left: -40px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 300px;
+
+        h2 {
+            @extend %FontTemperature;
+        }
+    }
+}

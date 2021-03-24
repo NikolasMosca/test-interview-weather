@@ -11,7 +11,7 @@ const CardDay = ({ background, temperatures }) => {
             <div className={styles.ItemsContainer}>
                 {temperatures.map(({ temperature, hour }, index) => (
                     <div className={styles.Item} key={index}>
-                        <h3>{temperature}</h3>
+                        <h3>{temperature}°</h3>
                         <div className={styles.VerticalLine}>
                             <div className={styles.Point}></div>
                         </div>
@@ -33,7 +33,7 @@ CardDay.propTypes = {
      */
     temperatures: PropTypes.arrayOf(
         PropTypes.shape({
-            temperature: PropTypes.string.isRequired,
+            temperature: PropTypes.number.isRequired,
             hour: PropTypes.string.isRequired,
         })
     ).isRequired,
