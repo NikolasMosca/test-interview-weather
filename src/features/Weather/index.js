@@ -16,7 +16,7 @@ import CardTemperature from "../../components/CardTemperature"
 
 import styles from "./style.module.scss"
 
-export default () => {
+const Weather = () => {
     const [search, setSearch] = useState("")
 
     const dispatch = useDispatch()
@@ -45,6 +45,18 @@ export default () => {
 
     if (isLoading) {
         return <div className={styles.Loader}>Loading...</div>
+    }
+
+    const getBrowserGeoLocation = () => {
+        if(!navigator.geolocation) {
+            alert('Geolocation is not supported by your browser')
+          } else {
+            navigator.geolocation.getCurrentPosition(
+                (position) => dispatch(getCityData(null, {lat: position.coords.latitude, lon: position.coords.longitude})),
+                (error) => alert(error.message),
+                { enableHighAccuracy: false, timeout: 5000},
+            );
+          }
     }
 
     const {
@@ -115,9 +127,11 @@ export default () => {
 
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
-                    <button>Add localization</button>
+                    <button onClick={getBrowserGeoLocation}>Add localization</button>
                 </div>
             </div>
         </div>
     )
 }
+
+export default Weather
