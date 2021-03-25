@@ -1,3 +1,50 @@
+# Weather PWA
+
+![](./readme-assets/preview.jpg)
+
+---
+
+## Description
+
+It's a web app that permits viewing the weather of different cities.
+The service to retrieve the data is [Open Weather API](https://openweathermap.org/).
+
+For each city, you can view the current weather of the city with the temperature, forecasts for this week, and the history of temperatures of the day.
+
+You can save your favorite cities and view the current weather with just a click.
+
+### The project is hosted on netflify and it is available at this link
+
+### [Click Here](https://musing-mestorf-1a7643.netlify.app/)
+
+## Technologies
+
+This PWA was made with:
+
+-   **React** as the main framework (with hooks)
+-   **Redux** as state manager (with hooks)
+-   **Storybook** as documentation for components
+-   **Cypress** as E2E testing library
+-   **Jest** as the unit testing library
+
+## How to do to use it locally
+
+-   Just clone this repository and launch on the project folder `npm install`
+-   You must register in the open weather platform and retrieve your API KEY
+-   When you have the API KEY just duplicate `.env.example` and rename it in `.env` and insert your API KEY inside this file
+-   For starting the project you can launch `npm start`
+-   For starting the unit tests you can launch `npm run test`
+-   For starting the E2E tests you can launch `npm run cypress`
+-   For showing the components documentation you can launch `npm run storybook`
+
+## Decisions made during the test interview
+
+-   I prefer to avoid storing the saved cities in local storage to focus better on the request. This decision would have taken greater effort for managing the state and updates the local storage when data becomes old.
+-   I have implemented a responsive mobile view to show better the interface with minor resolutions. In the request is not specified what behavior would behave is expected
+-   Unfortunately, I cannot take the exact font and sizes because I can't access the mockup details. For this reason, I tried to follow it as strictly as I can and I edit the icons personally to implement them.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
