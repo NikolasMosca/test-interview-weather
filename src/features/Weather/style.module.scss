@@ -219,6 +219,8 @@ body {
         .MainContainer {
             order: 0;
             width: 100%;
+            height: auto;
+            min-height: 350px;
         }
 
         .CityContainer {
