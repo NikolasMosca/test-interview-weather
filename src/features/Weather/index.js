@@ -63,15 +63,16 @@ const Weather = () => {
     }
 
     const getBrowserGeoLocation = () => {
-        if(!navigator.geolocation) {
-            alert('Geolocation is not supported by your browser')
-          } else {
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser")
+        } else {
             navigator.geolocation.getCurrentPosition(
-                (position) => dispatch(getCityData(null, {lat: position.coords.latitude, lon: position.coords.longitude})),
+                (position) =>
+                    dispatch(getCityData(null, { lat: position.coords.latitude, lon: position.coords.longitude })),
                 (error) => alert(error.message),
-                { enableHighAccuracy: false, timeout: 5000},
-            );
-          }
+                { enableHighAccuracy: false, timeout: 5000 }
+            )
+        }
     }
 
     const {
@@ -116,12 +117,14 @@ const Weather = () => {
 
             <div className={styles.TempContainer}>
                 <h3>Today</h3>
-                <CardTemperature
-                    temperatures={temperatures.map((item) => ({
-                        temperature: item.temp,
-                        hour: item.hour,
-                    }))}
-                />
+                <div className={styles.CardTemperature}>
+                    <CardTemperature
+                        temperatures={temperatures.map((item) => ({
+                            temperature: item.temp,
+                            hour: item.hour,
+                        }))}
+                    />
+                </div>
             </div>
 
             <div className={styles.TabsContainer}>
@@ -149,7 +152,7 @@ const Weather = () => {
                     <h3>Localization</h3>
                     <button onClick={getBrowserGeoLocation}>
                         <img src={LocalizationImage} alt="Localization icon" />
-                        Add localization
+                        <span>Add localization</span>
                     </button>
                 </div>
             </div>
