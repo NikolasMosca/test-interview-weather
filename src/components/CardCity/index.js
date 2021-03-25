@@ -8,7 +8,7 @@ import styles from "./style.module.scss"
 const CardCity = ({ background, city, date, hour, temperature, image }) => {
     return (
         <Card background={background} className={styles.CardContainer}>
-            <div>
+            <div cypress-ref="city-item">
                 <h3>{city}</h3>
                 <time className={styles.Date}>{date}</time>
                 <time className={styles.Time}>{hour}</time>

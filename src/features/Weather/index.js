@@ -63,15 +63,16 @@ const Weather = () => {
     }
 
     const getBrowserGeoLocation = () => {
-        if(!navigator.geolocation) {
-            alert('Geolocation is not supported by your browser')
-          } else {
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser")
+        } else {
             navigator.geolocation.getCurrentPosition(
-                (position) => dispatch(getCityData(null, {lat: position.coords.latitude, lon: position.coords.longitude})),
+                (position) =>
+                    dispatch(getCityData(null, { lat: position.coords.latitude, lon: position.coords.longitude })),
                 (error) => alert(error.message),
-                { enableHighAccuracy: false, timeout: 5000},
-            );
-          }
+                { enableHighAccuracy: false, timeout: 5000 }
+            )
+        }
     }
 
     const {
@@ -96,7 +97,7 @@ const Weather = () => {
             </div>
 
             <div className={styles.CityContainer}>
-                <button className={styles.AddCity} onClick={onAddCity}>
+                <button className={styles.AddCity} onClick={onAddCity} cypress-ref="add-city">
                     <img src={AddImage} alt="Add icon" />
                     Add city
                 </button>
@@ -138,8 +139,9 @@ const Weather = () => {
                             onChange={(e) => setSearch(e.target.value)}
                             type="text"
                             placeholder="ex: Miami"
+                            cypress-ref="search-input"
                         />
-                        <button onClick={onSearchCity}>
+                        <button onClick={onSearchCity} cypress-ref="search-button">
                             <img src={SearchImage} alt="Search icon" />
                         </button>
                     </div>
@@ -147,7 +149,7 @@ const Weather = () => {
 
                 <div className={styles.LocalizationContainer}>
                     <h3>Localization</h3>
-                    <button onClick={getBrowserGeoLocation}>
+                    <button onClick={getBrowserGeoLocation} cypress-ref="localization-button">
                         <img src={LocalizationImage} alt="Localization icon" />
                         Add localization
                     </button>

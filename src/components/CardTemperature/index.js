@@ -10,7 +10,7 @@ const CardDay = ({ background, temperatures }) => {
             <h2>Now</h2>
             <div className={styles.ItemsContainer}>
                 {temperatures.map(({ temperature, hour }, index) => (
-                    <div className={styles.Item} key={index}>
+                    <div className={styles.Item} key={index} cypress-ref="temperature-item">
                         <h3>{temperature}°</h3>
                         <div className={styles.VerticalLine}>
                             <div className={styles.Point}></div>

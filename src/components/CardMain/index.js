@@ -8,13 +8,13 @@ import styles from "./style.module.scss"
 const CardMain = ({ name, date, temperature, weatherImage, weatherDescription }) => {
     return (
         <Card className={styles.MainCard}>
-            <h1>{name}</h1>
-            <time>{date}</time>
-            <h2>{weatherDescription}</h2>
+            <h1 cypress-ref="city-name">{name}</h1>
+            <time cypress-ref="city-date">{date}</time>
+            <h2 cypress-ref="city-description">{weatherDescription}</h2>
 
             <Card className={styles.CurrentTemperature}>
-                <h2>{temperature}°</h2>
-                <img src={getImageUrl(weatherImage)} alt={weatherDescription} />
+                <h2 cypress-ref="city-temperature">{temperature}°</h2>
+                <img cypress-ref="city-weather-image" src={getImageUrl(weatherImage)} alt={weatherDescription} />
             </Card>
         </Card>
     )
