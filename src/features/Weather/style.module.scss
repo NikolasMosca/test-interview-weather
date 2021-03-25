@@ -284,3 +284,23 @@ body {
         }
     }
 }
+
+@media screen and (min-width: 1000px) and (max-height: 900px) {
+    .WeatherContainer {
+        .MainContainer {
+            height: 400px;
+        }
+
+        .CityContainer {
+            height: 400px;
+        }
+
+        .TabsContainer {
+            height: 500px;
+        }
+
+        .SearchContainer {
+            height: 490px;
+        }
+    }
+}

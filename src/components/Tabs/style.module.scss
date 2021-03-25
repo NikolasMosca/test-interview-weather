@@ -173,3 +173,23 @@
         }
     }
 }
+
+@media screen and (min-width: 1000px) and (max-height: 900px) {
+    .TabsContainer {
+        height: auto;
+        padding-bottom: 40px;
+        .Body {
+            .WeekView {
+                .Item {
+                    > div {
+                        height: 300px;
+                    }
+                }
+            }
+
+            .MonthView {
+                padding: 0;
+            }
+        }
+    }
+}
