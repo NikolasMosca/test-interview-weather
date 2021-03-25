@@ -31,7 +31,7 @@ const Tabs = ({ week, month }) => {
             const indexEnd = (page + 1) * 3
             if (index >= indexStart && index < indexEnd) {
                 days.push(
-                    <div className={styles.Item} key={index}>
+                    <div className={styles.Item} key={index} cypress-ref="week-item">
                         <CardDay day={day} temperature={temp} image={image} />
                     </div>
                 )
@@ -46,12 +46,14 @@ const Tabs = ({ week, month }) => {
                 <div
                     className={`${styles.Item} ${activeTab === "WEEK" ? styles.Active : ""}`}
                     onClick={() => setActiveTab("WEEK")}
+                    cypress-ref="week-tab"
                 >
                     This week
                 </div>
                 <div
                     className={`${styles.Item} ${activeTab === "MONTH" ? styles.Active : ""}`}
                     onClick={() => setActiveTab("MONTH")}
+                    cypress-ref="month-tab"
                 >
                     This month
                 </div>
@@ -65,7 +67,7 @@ const Tabs = ({ week, month }) => {
                 )}
                 {activeTab === "MONTH" && (
                     <Card>
-                        <div className={styles.MonthView}>
+                        <div className={styles.MonthView} cypress-ref="month-item">
                             <div className={styles.Left}>
                                 <time>{month.date}</time>
                                 <img src={getImageUrl(month.image)} alt={month.typeWind} />
