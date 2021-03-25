@@ -117,12 +117,14 @@ const Weather = () => {
 
             <div className={styles.TempContainer}>
                 <h3>Today</h3>
-                <CardTemperature
-                    temperatures={temperatures.map((item) => ({
-                        temperature: item.temp,
-                        hour: item.hour,
-                    }))}
-                />
+                <div className={styles.CardTemperature}>
+                    <CardTemperature
+                        temperatures={temperatures.map((item) => ({
+                            temperature: item.temp,
+                            hour: item.hour,
+                        }))}
+                    />
+                </div>
             </div>
 
             <div className={styles.TabsContainer}>
@@ -151,7 +153,7 @@ const Weather = () => {
                     <h3>Localization</h3>
                     <button onClick={getBrowserGeoLocation} cypress-ref="localization-button">
                         <img src={LocalizationImage} alt="Localization icon" />
-                        Add localization
+                        <span>Add localization</span>
                     </button>
                 </div>
             </div>

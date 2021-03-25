@@ -55,6 +55,7 @@
             color: $color-primary;
             height: 100%;
             padding-top: 20px;
+            overflow: hidden;
 
             .Left {
                 width: 50%;
@@ -73,6 +74,7 @@
             }
 
             .Right {
+                width: 50%;
                 height: 100%;
                 overflow-y: auto;
                 h2 {
@@ -108,6 +110,64 @@
                     width: 12px;
                     height: 12px;
                     background: $color-primary;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .TabsContainer {
+        height: auto;
+        .Header {
+            .Item {
+                font-size: 20px;
+            }
+        }
+
+        .Body {
+            height: 550px;
+            .WeekView {
+                flex-direction: column;
+
+                .Item {
+                    width: 100%;
+                    height: 150px;
+                    min-height: auto;
+                    margin-bottom: 10px;
+
+                    > div {
+                        flex-direction: row;
+
+                        > img {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .MonthView {
+                flex-direction: column;
+
+                .Left {
+                    width: 100%;
+                    height: 130px;
+                    display: flex;
+                    align-items: center;
+
+                    time {
+                        padding: 0;
+                        width: 40%;
+                    }
+                    img {
+                        width: 60%;
+                        height: auto;
+                        padding: 0;
+                    }
+                }
+
+                .Right {
+                    width: 100%;
                 }
             }
         }
