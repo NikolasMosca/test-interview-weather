@@ -68,8 +68,8 @@ const getTypeOfWind = (speed) => {
 
 /**
  * Get all data from the city
- * @param {string} cityName 
- * @param {{lat: float, lon: float}} position 
+ * @param {string} cityName
+ * @param {{lat: float, lon: float}} position
  */
 export const getCityData = (cityName, position) => async (dispatch) => {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
@@ -79,22 +79,26 @@ export const getCityData = (cityName, position) => async (dispatch) => {
 
     try {
         //Get basic data from city, includes lat and lon and the id
-        const { data } = getBasicData(cityName, position)
+        const data = await getBasicData(cityName, position)
 
         const detailParams = {
             lat: position && Object.keys(position).length > 0 ? position.lat : data.coord.lat,
             lon: position && Object.keys(position).length > 0 ? position.lon : data.coord.lon,
-            
+
             units: "metric",
             appid: apiKey,
         }
         //Get details about forecast data
         const details = await axios.get(`https://api.openweathermap.org/data/2.5/onecall`, {
-            params: {...detailParams, exclude: "minutely"},
+            params: { ...detailParams, exclude: "minutely" },
         })
         //Get details about previous data of the current day
         const history = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine`, {
-            params: {...detailParams, dt: moment().subtract(1, "seconds").unix(), exclude: "current,minutely,daily,alerts"},
+            params: {
+                ...detailParams,
+                dt: moment().subtract(1, "seconds").unix(),
+                exclude: "current,minutely,daily,alerts",
+            },
         })
 
         const {
@@ -157,13 +161,13 @@ export const getCityData = (cityName, position) => async (dispatch) => {
 
 export const getBasicData = async (cityName, position) => {
     //Get basic data from city, includes lat and lon and the id
-    if (!cityName && !position) return 
+    if (!cityName && !position) return
     const params = {
         appid: apiKey,
-        units: "metric"
+        units: "metric",
     }
     if (position && Object.keys(position).length > 0) {
-        if (Object.keys(position).toString() !== 'lat,lon') return false
+        if (Object.keys(position).toString() !== "lat,lon") return false
         params.lat = position.lat
         params.lon = position.lon
     } else {
