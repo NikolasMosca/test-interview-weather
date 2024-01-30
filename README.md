@@ -13,10 +13,6 @@ For each city, you can view the current weather of the city with the temperature
 
 You can save your favorite cities and view the current weather with just a click.
 
-### The project is hosted on netflify and it is available at this link
-
-### [Click Here](https://musing-mestorf-1a7643.netlify.app/)
-
 ## Technologies
 
 This PWA was made with:
